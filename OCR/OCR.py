@@ -1,4 +1,4 @@
-#/bin/python3 /home/anirudh/Documents/Dr.-Medicine/OCR/OCR.py --image OCR/test1.jpg
+#/bin/python3 /home/anirudh/Documents/Dr.-Medicine/OCR/OCR.py --image OCR/test3.png
 
 # import the necessary packages
 import pytesseract
