@@ -1,5 +1,5 @@
 #/bin/python3 /home/anirudh/Documents/Dr.-Medicine/OCR/OCR.py --image OCR/test3.png
-
+#codr by Anirudh Lodh
 # import the necessary packages
 import pytesseract
 import argparse
