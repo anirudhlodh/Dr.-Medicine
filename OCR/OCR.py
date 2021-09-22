@@ -1,12 +1,19 @@
-# text recognition
-import cv2
+#/bin/python3 /home/anirudh/Documents/Dr.-Medicine/OCR/OCR.py --image OCR/test1.jpg
+
+# import the necessary packages
 import pytesseract
-# read image
-im = cv2.imread('./test3.jpg')
-# configurations
-config = ('-l eng --oem 1 --psm 3')
-# pytessercat
-text = pytesseract.image_to_string(im, config=config)
-# print text
-text = text.split('\n')
-text
+import argparse
+import cv2
+# construct the argument parser and parse the arguments}
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required=True,
+	help="path to input image to be OCR'd")
+args = vars(ap.parse_args())
+
+# load the input image and convert it from BGR to RGB channel
+# ordering}
+image = cv2.imread(args["image"])
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+# use Tesseract to OCR the image
+text = pytesseract.image_to_string(image)
+print(text)
