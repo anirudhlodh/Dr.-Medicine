@@ -1,4 +1,3 @@
-#code by Utkarsh Saxena
 # import the necessary packages
 import pandas as pd
 import numpy as np
