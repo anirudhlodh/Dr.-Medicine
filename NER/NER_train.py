@@ -5,7 +5,7 @@ import re
 from spacy.training import Example
 spacy.prefer_gpu()
 nlp = spacy.load("en_core_web_sm")
-df = pd.read_csv("/home/utkarsh/Desktop/Dr.-Medicine/NER/dataset/drug_review_dataset_with_sentiment.csv")
+df = pd.read_csv("NER/dataset/drug_review_dataset_with_sentiment.csv")
 def process_review(review):
     processed_token = []
     for token in review.split():
@@ -55,9 +55,5 @@ with nlp.disable_pipes(*other_pipes):  # only train NER
             example = Example.from_dict(doc, annotations)
             nlp.update([example], drop=0.35, sgd=optimizer, losses=losses)
         print(losses)
-# test the trained model
-test_text = "James went to buy Aspirin last year 2020"
-doc = nlp(test_text)
-print("Entities in '%s'" % test_text)
-for ent in doc.ents:
-    print(ent.label_, " -- ", ent.text)
+# nlp.tokenizer = None
+nlp.to_disk('NER/NER_dr_medicine')
