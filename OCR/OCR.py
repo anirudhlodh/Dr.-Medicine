@@ -1,19 +1,24 @@
-#/bin/python3 /home/anirudh/Documents/Dr.-Medicine/OCR/OCR.py --image OCR/test3.png
-#code by Anirudh Lodh
-# import the necessary packages
-import pytesseract
-import argparse
-import cv2
-# construct the argument parser and parse the arguments}
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to input image to be OCR'd")
-args = vars(ap.parse_args())
+from paddleocr import PaddleOCR, draw_ocr # main OCR dependencies
+from matplotlib import pyplot as plt # plot images
+import cv2 #opencv
+import os # folder directory navigation
 
-# load the input image and convert it from BGR to RGB channel
-# ordering}
-image = cv2.imread(args["image"])
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-# use Tesseract to OCR the image
-text = pytesseract.image_to_string(image)
-print(text)
+ocr_model = PaddleOCR(lang='en')
+
+img_path = os.path.join('OCR/test4.png')
+
+result = ocr_model.ocr(img_path)
+
+# result
+
+my_list = []
+for res in result:
+  my_list.append(res[1][0]) 
+# print(my_list)
+
+def listToString(s): 
+    str1 = " " 
+    return (str1.join(s))       
+final_ocr_output = listToString(my_list) 
+
+print(final_ocr_output)
