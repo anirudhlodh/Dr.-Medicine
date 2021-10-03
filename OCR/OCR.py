@@ -5,7 +5,7 @@ import os # folder directory navigation
 
 ocr_model = PaddleOCR(lang='en')
 
-img_path = os.path.join('OCR/test1.png')
+img_path = os.path.join('OCR/drug5.jpg')
 
 result = ocr_model.ocr(img_path)
 

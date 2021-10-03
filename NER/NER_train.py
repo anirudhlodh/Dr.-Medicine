@@ -56,4 +56,4 @@ with nlp.disable_pipes(*other_pipes):  # only train NER
             nlp.update([example], drop=0.35, sgd=optimizer, losses=losses)
         print(losses)
 # nlp.tokenizer = None
-nlp.to_disk('NER/NER_dr_medicine')
+nlp.to_disk('NER/NER_dr_medicine_new.spacy')
