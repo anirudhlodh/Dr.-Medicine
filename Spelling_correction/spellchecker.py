@@ -1,7 +1,8 @@
 from gingerit.gingerit import GingerIt
 
-text = 'paracetamoi'
+text = 'PARACETAMOI TABLETSIP Parasafe ANALGESIC.ANTIPYRETICTABLETS JStrassenburg'
+lo_case = text.lower()
 
 parser = GingerIt()
-ct = parser.parse(text)
-print(ct) 
+ct = parser.parse(lo_case)
+print(ct['result']) 
