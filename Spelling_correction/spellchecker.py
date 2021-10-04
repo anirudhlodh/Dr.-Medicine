@@ -1,6 +1,6 @@
 from gingerit.gingerit import GingerIt
 
-text = 'PARACETAMOI TABLETSIP Parasafe ANALGESIC.ANTIPYRETICTABLETS JStrassenburg'
+text = '10010 TABLETS PARACETAMOL TABLETS BP 500 mg Dolo MICRO'
 lo_case = text.lower()
 
 parser = GingerIt()
