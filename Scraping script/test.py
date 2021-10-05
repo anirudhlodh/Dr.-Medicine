@@ -26,7 +26,7 @@ class MyBot:
 
         self.driver = webdriver.Chrome(executable_path="Scraping script/chromedriver", options=self.options)
 
-        drug_query_name = "adrenaline"
+        drug_query_name = "Aspirin"
 
         self.driver.get("https://go.drugbank.com/")
         self.driver.find_element(By.XPATH, '/html/body/main/div/div[1]/div[1]/div[2]/form/div[1]/div/input').send_keys(drug_query_name) # entering text in search bar       
