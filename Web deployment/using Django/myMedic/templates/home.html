@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dr. Medicine</title>
+</head>
+<body>
+	<h1>Welcome to Dr. Medicine </h1>
+	<h4>Please Upload the Image</h4>
+	
+
+
+	<form action="imageuploadimageprocess" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		<input id="image" type="file" name="image"/>
+		<input type="submit" value="Submit">
+	</form>
+
+</body>
+</html>
