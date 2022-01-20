@@ -1,8 +1,9 @@
 from gingerit.gingerit import GingerIt
 
-text = 'PARACETAMOI TABLETSIP Parasafe ANALGESIC.ANTIPYRETICTABLETS JStrassenburg'
+text = "ABILIFY 10mg aripiprazol 28 Tabletten"
 lo_case = text.lower()
 
 parser = GingerIt()
 ct = parser.parse(lo_case)
-print(ct['result']) 
+x = ct['result']
+print(x) 
