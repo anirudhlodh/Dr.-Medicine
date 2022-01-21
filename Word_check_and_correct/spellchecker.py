@@ -1,6 +1,6 @@
 from gingerit.gingerit import GingerIt
 
-text = "ABILIFY 10mg aripiprazol 28 Tabletten"
+text = "ABILIFY10mg aripiprazol 28Tabletten A"
 lo_case = text.lower()
 
 parser = GingerIt()
