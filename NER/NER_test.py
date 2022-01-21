@@ -5,7 +5,7 @@ def listToString(s):
     str1 = " " 
     return (str1.join(s))  
 nlp = spacy.load('/home/anirudhlodh/Desktop/projects/Dr.-Medicine/NER/NER_dr_medicine_new.spacy')
-test_text = "ABILIFY10mg aripiprazol 28Tabletten A"
+test_text = "Caja con 30 tabletas Seroquel quetiapina 25 mg Tabletas AstraZeneca2"
 doc = nlp(test_text)
 print("Entities in '%s'" % test_text)
 for ent in doc.ents:

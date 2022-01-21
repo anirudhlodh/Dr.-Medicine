@@ -14,6 +14,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from gingerit.gingerit import GingerIt
 import pytesseract
+
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"
 ocr_model = PaddleOCR(lang='en')
 nlp = spacy.load('/home/anirudhlodh/Desktop/projects/Dr.-Medicine/NER/NER_dr_medicine_new.spacy')
@@ -50,8 +51,7 @@ def listToString(s):
     return (str1.join(s))       
 
 def load_image(img):
-	# image = np.array(img)
-	image = img
+	image = np.array(img)
 	result = ocr_model.ocr(image)
 
 	# result
@@ -132,10 +132,10 @@ def main():
 			st.header("Details about the medicine")
 			x = load_image(our_image)
 			st.text(x)
-			# y = scrape(x)
-			# for i in range(len(y)):
-			# 	st.write(y[i])
-			# 	st.text("")
+			y = scrape(x)
+			for i in range(len(y)):
+				st.write(y[i])
+				st.text("")
 	
 		
 	st.sidebar.header("About")
