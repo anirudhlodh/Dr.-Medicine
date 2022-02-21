@@ -14,6 +14,9 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from gingerit.gingerit import GingerIt
 import pytesseract
+import sys
+import shutil
+
 
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"
 ocr_model = PaddleOCR(lang='en')
@@ -50,9 +53,9 @@ def listToString(s):
     str1 = " " 
     return (str1.join(s))       
 
-def load_image(img):
-	image = np.array(img)
-	result = ocr_model.ocr(image)
+def load_image():
+	img_path = os.path.join('/home/anirudhlodh/Desktop/projects/Dr.-Medicine/Web deployment/tempDir/tempfile')
+	result = ocr_model.ocr(img_path)
 
 	# result
 
@@ -61,29 +64,34 @@ def load_image(img):
 		my_list.append(res[1][0])
 	
 	final_ocr_output = listToString(my_list)
-	print(final_ocr_output)
-	# print(my_list)
-	# image = get_grayscale(image)
-	# image = thresholding(image)
-	# image = remove_noise(image)
-	# image = deskew(image)
-	# # cv2.imshow("pre-processed image", img)
+	final_ocr_output_lower = final_ocr_output.lower()
+	print(final_ocr_output_lower)
 
-	# x = ocr_core(image)
-	# y = x.splitlines()
-	# final_sc_output = listToString(y)
+	# test_text = final_ocr_output
+	# doc = nlp(test_text)
+	# print("Entities in '%s'" % test_text)
+	# for ent in doc.ents:
+	# 	return ent.text
+	a_file = open("/home/anirudhlodh/Desktop/projects/Dr.-Medicine/Web deployment/dataset_drugs/Drugs.txt", "r")
 
-	# lo_case = listToString(y).lower()
-	# parser = GingerIt()
-	# ct = parser.parse(lo_case)
-	# final_sc_output = ct['result']
+	list_of_lists = []
+	for line in a_file:
+		stripped_line = line.strip()
+		line_list = stripped_line.split()
+		list_of_lists.append(line_list)
 
-	test_text = final_ocr_output
-	doc = nlp(test_text)
-	print("Entities in '%s'" % test_text)
-	for ent in doc.ents:
-		return ent.text
-	# return doc.ents[0]
+	a_file.close()
+
+	result = []
+	for sublist in list_of_lists:
+		for item in sublist:
+			result.append(item)
+
+	for i in range(len(result)):
+		result[i] = result[i].lower()
+
+	res = [ele for ele in result if(ele in final_ocr_output_lower)]
+	return res[0]
 
 def scrape(ner_output):
 	options = webdriver.ChromeOptions()
@@ -112,9 +120,13 @@ def scrape(ner_output):
 	["SIDE EFFECTS :"],[driver.find_element(By.XPATH, '/html/body/main/div/div/div[2]/div[2]/dl[2]/dd[2]').text]]
 
 	return my_list
-        
+
 def main():
 	""" Dr. Medicine App"""
+	def save_uploadedfile(uploadedfile):
+		with open(os.path.join("tempDir","tempfile"),"wb") as f:
+			f.write(uploadedfile.getbuffer())
+			return st.success("Saved File:{} to tempDir".format(uploadedfile.name))
 	html_temp = """ """
 	st.markdown(html_temp , unsafe_allow_html = True)
 
@@ -124,19 +136,23 @@ def main():
 	st.subheader("Medicine Detection")
 	image_file = st.file_uploader("Upload Image",type=['jpg','png','jpeg'])
 	if image_file is not None :
+		dir = '/home/anirudhlodh/Desktop/projects/Dr.-Medicine/Web deployment/tempDir'
+		for f in os.listdir(dir):
+			os.remove(os.path.join(dir, f))		
 		our_image = Image.open(image_file)
 		st.text("Original Image")
 		st.write(type(our_image))
 		st.image(our_image)
+		save_uploadedfile(image_file)
 		if st.button("Detect"):
 			st.header("Details about the medicine")
-			x = load_image(our_image)
+			x = load_image()
 			st.text(x)
 			y = scrape(x)
 			for i in range(len(y)):
 				st.write(y[i])
 				st.text("")
-	
+
 		
 	st.sidebar.header("About")
 	st.sidebar.markdown("This is about and in this we will see who are peoples , had work on the project")
