@@ -130,11 +130,11 @@ def main():
 	html_temp = """ """
 	st.markdown(html_temp , unsafe_allow_html = True)
 
-	st.title("Dr. Medicine ")
-	st.text("Build with Streamlit and OpenCV and Intenal Modules")
+	st.title("DOCTOR MEDICINE")
+	st.text("E.P.I.C.S. project")
 
-	st.subheader("Medicine Detection")
-	image_file = st.file_uploader("Upload Image",type=['jpg','png','jpeg'])
+	st.subheader("Drug named entity extraction from images")
+	image_file = st.file_uploader("Upload an image of a medicine box/strip",type=['jpg','png','jpeg'])
 	if image_file is not None :
 		dir = '/home/anirudhlodh/Desktop/projects/Dr.-Medicine/Web deployment/tempDir'
 		for f in os.listdir(dir):
@@ -144,7 +144,7 @@ def main():
 		st.write(type(our_image))
 		st.image(our_image)
 		save_uploadedfile(image_file)
-		if st.button("Detect"):
+		if st.button("Identify and get details about the medicine"):
 			st.header("Details about the medicine")
 			x = load_image()
 			st.text(x)
@@ -154,8 +154,16 @@ def main():
 				st.text("")
 
 		
-	st.sidebar.header("About")
-	st.sidebar.markdown("This is about and in this we will see who are peoples , had work on the project")
+	st.sidebar.header("Credits")
+	st.sidebar.markdown("Anirudh Lodh - deployment and module linking")
+	st.sidebar.markdown("Utkarsh Saxena - Named entity recognition (NER)")
+	st.sidebar.markdown("Ajmal Khan - Web scraping (WS)")
+	st.sidebar.markdown("Akshay Markhedkar - Optical character recognition (OCR)")
+	st.sidebar.markdown("K.A. Patel Himey Atulkumar - NER team")
+	st.sidebar.markdown("Bhavya Manoj Votavat - OCR team")
+	st.sidebar.markdown("Aditya Pandit - deployment team")
+	st.sidebar.markdown("Rituj Raghuwanshi - Documentation")
+
 
 if __name__ == '__main__':
 	main()
