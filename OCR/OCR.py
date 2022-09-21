@@ -7,6 +7,7 @@ ocr_model = PaddleOCR(lang='en')
 
 img_path = os.path.join('/home/anirudhlodh/Desktop/projects/Dr.-Medicine/OCR/azithro.jpg')
 
+
 result = ocr_model.ocr(img_path)
 
 # result
